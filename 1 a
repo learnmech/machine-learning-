@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<conio.h>
+  int n;
+    	
+void create(int a[10])
+  {
+       int i;
+       printf("\n Enter the elements \n");
+       for(i=0;i<n;i++)
+       scanf("%d",&a[i]);
+   }
+  void print(int a[10])
+   {
+       int i;
+       printf("\nThe elements of the array are: ");
+       for(i=0;i<n;i++)
+       printf("%d ",a[i]);
+   }
+
+
+    
+int main()
+{
+        int a[10],ch,ele;
+        while(1)
+        {
+               printf("\nEnter your choice:\n1.Read\n2.Print\n3.Exit\n");
+               scanf("%d",&ch);   
+          switch(ch)
+         {
+          case 1:printf("\nEnter the number of elements ");
+	         scanf("%d",&n);
+	         create(a);
+	         break;
+          case 2:print(a);
+	         break; 
+          
+          case 3:exit(0);
+      }
+    }
+  return 0;
+}
