@@ -1,0 +1,83 @@
+#include<stdio.h>
+#define MAX 10
+typedef struct
+{
+ 	int n;
+ 	int from;
+ 	int to;
+ 	int auxi;
+ 	int ret; // which case to return
+}stack;
+
+int top = -1;
+stack st[MAX];
+int empty()
+{
+	return top==-1;
+}
+stack pop()
+{
+ 	return st[top--];
+}
+void push(int n,int beg,int to,int aux,int ret)
+{
+	top++;
+	st[top].n = n;
+	st[top].from = beg;
+	st[top].to = to;
+	st[top].auxi = aux;
+	st[top].ret = ret;
+}
+void hanoi(int n,int beg,int aux, int end)
+{
+ 	 stack t;
+	 int nmoves=0;
+	 int ret=1,temp,i;
+	 while(1)
+ 	 {
+		switch(ret)
+		{
+		 	case 1:if (n==1)
+					{
+					 	printf("\nMove %d: Move Disk %d from %c to %c",++nmoves,n,beg,end);
+					 	ret=5;
+					}
+					else
+					 	ret=2;
+					break;
+		 	case 2: push(n,beg,end,aux,3);
+					--n;
+					temp=end;
+					end=aux;
+					aux=temp;
+					ret=1;
+					break;
+	 		case 3: printf("\nMove %d: Move Disk %d from %c to %c",++nmoves,n,beg,end);
+	 		case 4:	push(n,beg,end,aux,5);
+					--n;
+					temp=beg;
+					beg=aux;
+					aux=temp;
+					ret=1;
+					break;
+			case 5: if(empty())
+					 	return;
+					 t=pop();
+					 n=t.n;
+					 beg=t.from;
+					 aux=t.auxi;
+					 end=t.to;
+					 ret=t.ret;
+			 break;
+	 	}
+	 	
+	}
+}
+int main()
+{
+	 int n;
+	 printf("\nEnter number of disks");
+	 scanf("%d",&n);
+	 hanoi(n,'A','C','B');
+	 return 0;
+}
